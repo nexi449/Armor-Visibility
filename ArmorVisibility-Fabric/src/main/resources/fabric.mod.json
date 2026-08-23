@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "armorvisibility",
+  "version": "${version}",
+  "name": "Armor Visibility",
+  "description": "A mod that allows you to hide your armor",
+  "authors": [
+    "Damon"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/project/armorvisibility",
+    "issues": "https://github.com/nexi449/Armor-Visibility/issues",
+    "sources": "https://github.com/nexi449/Armor-Visibility"
+  },
+  "license": "ARR",
+  "icon": "assets/armorvisibility/icon.png",
+  "custom": {
+    "modmenu": {
+      "Message": "Thank you so much for downloading my mod! <3",
+      "links": {
+        "Modrinth": "https://modrinth.com/project/armorvisibility",
+        "Bug Reports": "https://github.com/nexi449/Armor-Visibility/issues",
+        "Author's Github": "https://github.com/nexi449",
+        "Author Bio": "https://fruity.bio/damon"
+      }
+    }
+  },
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.example.armorvisibility.ArmorVisibilityClient"
+    ],
+    "modmenu": [
+      "com.example.armorvisibility.compat.ArmorVisibilityModMenuApi"
+    ]
+  },
+  "mixins": [
+    "armorvisibility.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": ">=1.21.1 <=1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

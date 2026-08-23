@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.armorvisibility.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ArmorFeatureRendererMixin",
+    "CapeFeatureRendererMixin",
+    "WingsLayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
