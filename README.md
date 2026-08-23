@@ -4,4 +4,6 @@
 [![My Bio](https://img.shields.io/badge/My%20Bio-Fruity.bio-8A2BE2?logo=link&logoColor=white)](https://fruity.bio/damon)
 
 
+https://discord.gg/ErBX2engyp
+
 # https://modrinth.com/project/armorvisibility
