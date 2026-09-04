@@ -8,7 +8,7 @@ modId="armorvisibility"
 version="${version}"
 displayName="Armor Visibility"
 displayURL="https://modrinth.com/project/armorvisibility"
-authors="Damon"
+authors="nexi499"
 description='''A mod that allows you to hide your armor'''
 logoFile="armorvisibility/icon.png"
 
