@@ -16,6 +16,14 @@
 !ArmorVisibility-Quilt/src/
 !ArmorVisibility-Quilt/src/**
 
+!ArmorVisibility-Fabric-26.1-26.2/
+!ArmorVisibility-Fabric-26.1-26.2/src/
+!ArmorVisibility-Fabric-26.1-26.2/src/**
+
+!ArmorVisibility-Quilt-26.1-26.2/
+!ArmorVisibility-Quilt-26.1-26.2/src/
+!ArmorVisibility-Quilt-26.1-26.2/src/**
+
 
 ArmorVisibility-*/gradle-8.10/
 ArmorVisibility-*/*.zip
