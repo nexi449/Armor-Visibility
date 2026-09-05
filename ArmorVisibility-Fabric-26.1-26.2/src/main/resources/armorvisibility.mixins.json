@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.armorvisibility.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "ArmorFeatureRendererMixin",
+    "CapeFeatureRendererMixin",
+    "ElytraFeatureRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

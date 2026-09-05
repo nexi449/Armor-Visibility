@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "armorvisibility",
+    "version": "${version}",
+    "metadata": {
+      "name": "Armor Visibility",
+      "description": "A mod that allows you to hide your armor",
+      "contributors": {
+        "nexi499": "Owner"
+      },
+      "contact": {
+        "homepage": "https://modrinth.com/project/armorvisibility",
+        "issues": "https://github.com/nexi449/Armor-Visibility/issues",
+        "sources": "https://github.com/nexi449/Armor-Visibility"
+      },
+      "icon": "assets/armorvisibility/icon.png",
+      "custom": {
+        "modmenu": {
+          "Message": "Thank you so much for downloading my mod! <3",
+          "links": {
+            "Modrinth": "https://modrinth.com/project/armorvisibility",
+            "Bug Reports": "https://github.com/nexi449/Armor-Visibility/issues",
+            "Author's Github": "https://github.com/nexi449",
+            "Author Bio": "https://fruity.bio/damon"
+          }
+        }
+      }
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "pre_launch": "com.example.armorvisibility.compat.ArmorVisibilityQuiltEntrypoint"
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=0.31.0-beta.3"
+      },
+      {
+        "id": "minecraft",
+        "versions": ">=26.1 <26.3"
+      },
+      {
+        "id": "fabric-api",
+        "versions": "*"
+      }
+    ]
+  },
+  "mixin": "armorvisibility.mixins.json"
+}
