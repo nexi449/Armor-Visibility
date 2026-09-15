@@ -3,7 +3,4 @@
 [![License](https://img.shields.io/badge/License-ARR-blue)](https://modrinth.com/mod/armorvisibility)
 [![My Bio](https://img.shields.io/badge/My%20Bio-Fruity.bio-8A2BE2?logo=link&logoColor=white)](https://fruity.bio/damon)
 
-
-https://discord.gg/ErBX2engyp
-
 # https://modrinth.com/project/armorvisibility
