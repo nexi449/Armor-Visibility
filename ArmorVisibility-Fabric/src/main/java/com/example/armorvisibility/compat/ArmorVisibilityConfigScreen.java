@@ -6,11 +6,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.GridWidget;
-import net.minecraft.client.gui.widget.SimplePositioningWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
-import net.minecraft.client.gui.tooltip.Tooltip;
 
 @Environment(EnvType.CLIENT)
 public class ArmorVisibilityConfigScreen extends Screen {
@@ -26,90 +23,95 @@ public class ArmorVisibilityConfigScreen extends Screen {
         super.init();
         ArmorVisibilityConfig.INSTANCE.load();
 
-        GridWidget grid = new GridWidget();
-        grid.setSpacing(8);
-        GridWidget.Adder adder = grid.createAdder(1);
+        int contentWidth = Math.min(368, Math.max(0, this.width - 32));
+        int columnGap = 8;
+        int buttonWidth = (contentWidth - columnGap) / 2;
+        int leftX = (this.width - contentWidth) / 2;
+        int rightX = leftX + buttonWidth + columnGap;
+        int contentHeight = 140;
+        int startY = Math.max(48, (this.height - contentHeight) / 2);
 
-        ButtonWidget globalButton = ButtonWidget.builder(Text.literal("Global: " + (ArmorVisibilityConfig.INSTANCE.isArmorVisible() ? "On" : "Off")), button -> {
-            ArmorVisibilityConfig.INSTANCE.setArmorVisible(!ArmorVisibilityConfig.INSTANCE.isArmorVisible());
-            button.setMessage(Text.literal("Global: " + (ArmorVisibilityConfig.INSTANCE.isArmorVisible() ? "On" : "Off")));
-            updateCheckboxes();
-        }).build();
-        adder.add(globalButton);
-        ButtonWidget elytraButton = createVisibilityButton(
-            "Elytra",
-            ArmorVisibilityConfig.INSTANCE::shouldKeepElytraVisible,
-            visible -> ArmorVisibilityConfig.INSTANCE.setKeepElytraVisible(visible)
-        );
+        addArmorToggle("Helmet", ArmorVisibilityConfig.ArmorPart.HELMET, leftX, startY, buttonWidth);
+        addArmorToggle("Chestplate", ArmorVisibilityConfig.ArmorPart.CHESTPLATE, rightX, startY, buttonWidth);
+        addArmorToggle("Leggings", ArmorVisibilityConfig.ArmorPart.LEGGINGS, leftX, startY + 28, buttonWidth);
+        addArmorToggle("Boots", ArmorVisibilityConfig.ArmorPart.BOOTS, rightX, startY + 28, buttonWidth);
 
-        ButtonWidget othersButton = ButtonWidget.builder(Text.literal("Hide Armor of Others: " + (ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers() ? "On" : "Off")), button -> {
-            ArmorVisibilityConfig.INSTANCE.setHideForOtherPlayers(!ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers());
-            button.setMessage(Text.literal("Hide Armor of Others: " + (ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers() ? "On" : "Off")));
-        }).build();
-        adder.add(othersButton);
-        ButtonWidget capeButton = createVisibilityButton(
-            "Cape",
-            ArmorVisibilityConfig.INSTANCE::shouldKeepCapeVisible,
-            visible -> ArmorVisibilityConfig.INSTANCE.setKeepCapeVisible(visible)
-        );
-        ButtonWidget playerOnlyButton = createVisibilityButton(
-            "Player Only",
-            ArmorVisibilityConfig.INSTANCE::isPlayerOnly,
-            visible -> ArmorVisibilityConfig.INSTANCE.setPlayerOnly(visible)
-        );
+        addDrawableChild(createToggleButton(
+                "Global Armor",
+                ArmorVisibilityConfig.INSTANCE::isArmorVisible,
+                ArmorVisibilityConfig.INSTANCE::setArmorVisible,
+                leftX + (contentWidth - buttonWidth) / 2,
+                startY + 56,
+                buttonWidth
+        ));
 
-        ButtonWidget doneButton = ButtonWidget.builder(ScreenTexts.DONE, button -> client.setScreen(parent)).build();
-        addToggle(adder, "Helmet", ArmorVisibilityConfig.ArmorPart.HELMET);
-        addToggle(adder, "Chestplate", ArmorVisibilityConfig.ArmorPart.CHESTPLATE);
-        addToggle(adder, "Leggings", ArmorVisibilityConfig.ArmorPart.LEGGINGS);
-        addToggle(adder, "Boots", ArmorVisibilityConfig.ArmorPart.BOOTS);
-        adder.add(doneButton);
+        addDrawableChild(createToggleButton(
+                "Cape",
+                ArmorVisibilityConfig.INSTANCE::shouldKeepCapeVisible,
+                ArmorVisibilityConfig.INSTANCE::setKeepCapeVisible,
+                leftX,
+                startY + 92,
+                buttonWidth
+        ));
+        addDrawableChild(createToggleButton(
+                "Elytra",
+                ArmorVisibilityConfig.INSTANCE::shouldKeepElytraVisible,
+                ArmorVisibilityConfig.INSTANCE::setKeepElytraVisible,
+                rightX,
+                startY + 92,
+                buttonWidth
+        ));
+        addDrawableChild(createToggleButton(
+                "Player Only",
+                ArmorVisibilityConfig.INSTANCE::isPlayerOnly,
+                ArmorVisibilityConfig.INSTANCE::setPlayerOnly,
+                leftX,
+                startY + 120,
+                buttonWidth
+        ));
+        addDrawableChild(createToggleButton(
+                "Other Armor",
+                ArmorVisibilityConfig.INSTANCE::shouldHideForOtherPlayers,
+                ArmorVisibilityConfig.INSTANCE::setHideForOtherPlayers,
+                rightX,
+                startY + 120,
+                buttonWidth
+        ));
 
-        grid.refreshPositions();
-        SimplePositioningWidget.setPos(grid, this.width / 2 - 120, 40, this.width - 40, this.height - 80);
-        grid.forEachChild(child -> {
-            child.setX(this.width - 40 - child.getWidth());
-            addDrawableChild(child);
-        });
-
-        elytraButton.setPosition(globalButton.getX() - elytraButton.getWidth() - 8, globalButton.getY() + 6);
-        capeButton.setPosition(othersButton.getX() - capeButton.getWidth() - 8, othersButton.getY() + 6);
-        playerOnlyButton.setPosition(capeButton.getX(), capeButton.getY() + capeButton.getHeight() + 8);
-        addDrawableChild(elytraButton);
-        addDrawableChild(capeButton);
-        addDrawableChild(playerOnlyButton);
+        int doneWidth = Math.min(200, Math.max(0, this.width - 32));
+        addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE, button -> client.setScreen(parent))
+                .dimensions((this.width - doneWidth) / 2, this.height - 32, doneWidth, 20)
+                .build());
     }
 
-    private void addToggle(GridWidget.Adder adder, String label, ArmorVisibilityConfig.ArmorPart part) {
+    private void addArmorToggle(String label, ArmorVisibilityConfig.ArmorPart part, int x, int y, int buttonWidth) {
+        addDrawableChild(ButtonWidget.builder(armorPartText(label, part), button -> {
+            ArmorVisibilityConfig.INSTANCE.setArmorPartHidden(
+                    part.getSlot(),
+                    !ArmorVisibilityConfig.INSTANCE.isArmorPartHidden(part.getSlot())
+            );
+            clearAndInit();
+        }).dimensions(x, y, buttonWidth, 20).build());
+    }
+
+    private ButtonWidget createToggleButton(String label, java.util.function.BooleanSupplier state,
+                                            java.util.function.Consumer<Boolean> setter, int x, int y, int buttonWidth) {
+        return ButtonWidget.builder(toggleText(label, state.getAsBoolean()), button -> {
+            setter.accept(!state.getAsBoolean());
+            clearAndInit();
+        }).dimensions(x, y, buttonWidth, 20).build();
+    }
+
+    private Text armorPartText(String label, ArmorVisibilityConfig.ArmorPart part) {
         boolean hidden = ArmorVisibilityConfig.INSTANCE.isArmorPartHidden(part.getSlot());
-        ButtonWidget toggle = ButtonWidget.builder(
-                Text.literal(label + ": " + (hidden ? "Hidden" : "Shown")),
-                button -> {
-                    boolean newValue = !ArmorVisibilityConfig.INSTANCE.isArmorPartHidden(part.getSlot());
-                    ArmorVisibilityConfig.INSTANCE.setArmorPartHidden(part.getSlot(), newValue);
-                    button.setMessage(Text.literal(label + ": " + (newValue ? "Hidden" : "Shown")));
-                }
-        ).build();
-        adder.add(toggle);
+        return Text.literal(label + ": " + (hidden ? "Hidden" : "Shown"));
     }
 
-    private ButtonWidget createVisibilityButton(String label, java.util.function.BooleanSupplier state,
-                                                java.util.function.Consumer<Boolean> setter) {
-        String enabledSymbol = label.equals("Player Only") ? "↔" : "↑";
-        boolean enabled = state.getAsBoolean();
-        ButtonWidget button = ButtonWidget.builder(Text.literal(enabled ? enabledSymbol : "↓"), clicked -> {
-            boolean newValue = !state.getAsBoolean();
-            setter.accept(newValue);
-            clicked.setMessage(Text.literal(newValue ? enabledSymbol : "↓"));
-            clicked.setTooltip(Tooltip.of(Text.literal(label + (newValue ? ": on" : ": off"))));
-            updateCheckboxes();
-        }).dimensions(0, 0, 20, 20).build();
-        button.setTooltip(Tooltip.of(Text.literal(label + (enabled ? ": on" : ": off"))));
-        return button;
-    }
-
-    private void updateCheckboxes() {
-        clearAndInit();
+    private Text toggleText(String label, boolean enabled) {
+        if (label.equals("Other Armor")) {
+            return Text.literal(label + ": " + (enabled ? "Hidden" : "Visible"));
+        }
+        return Text.literal(label + ": " + (enabled ? "On" : "Off"));
     }
 
     @Override

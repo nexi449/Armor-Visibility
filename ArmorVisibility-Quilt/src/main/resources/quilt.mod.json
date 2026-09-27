@@ -30,7 +30,12 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "pre_launch": "com.example.armorvisibility.compat.ArmorVisibilityQuiltEntrypoint"
+      "client": [
+        "com.example.armorvisibility.ArmorVisibilityClient"
+      ],
+      "modmenu": [
+        "com.example.armorvisibility.compat.ArmorVisibilityModMenuApi"
+      ]
     },
     "depends": [
       {
