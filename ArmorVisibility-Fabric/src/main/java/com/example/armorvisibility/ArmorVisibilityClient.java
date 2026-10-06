@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -28,29 +27,29 @@ public class ArmorVisibilityClient implements ClientModInitializer {
                     return;
                 }
 
-                ButtonWidget configButton = new ArmorIconButton(
-                        statsButton.getX() + statsButton.getWidth() + 4, statsButton.getY(), button -> {
+                ButtonWidget configButton = ButtonWidget.builder(net.minecraft.text.Text.of(""), button -> {
                     ArmorVisibilityConfig.INSTANCE.load();
                     client.setScreen(new ArmorVisibilityConfigScreen(client.currentScreen));
-                });
+                }).dimensions(statsButton.getX() + statsButton.getWidth() + 4, statsButton.getY(), 20, 20).build();
                 Screens.getButtons(screen).add(configButton);
             }
         });
 
     }
 
-    private static final class ArmorIconButton extends ButtonWidget {
-        private ArmorIconButton(int x, int y, PressAction onPress) {
-            super(x, y, 20, 20, net.minecraft.text.Text.of(""), onPress, DEFAULT_NARRATION_SUPPLIER);
-            setTooltip(Tooltip.of(net.minecraft.text.Text.of("Armor Visibility")));
+    public static void renderPauseMenuIcon(Screen screen, DrawContext context) {
+        if (!(screen instanceof GameMenuScreen)) {
+            return;
         }
 
-        @Override
-        protected void drawIcon(DrawContext context, int mouseX, int mouseY, float delta) {
-            drawButton(context);
-            context.drawTexture(RenderPipelines.GUI_TEXTURED, ARMOR_ICON, getX() + 2, getY() + 2,
-                    0, 0, 16, 16, 16, 16);
+        ClickableWidget statsButton = findStatisticsButton(screen);
+        if (statsButton == null) {
+            return;
         }
+
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, ARMOR_ICON,
+                statsButton.getX() + statsButton.getWidth() + 6, statsButton.getY() + 2,
+                0, 0, 16, 16, 16, 16);
     }
 
     private static ClickableWidget findStatisticsButton(Screen screen) {

@@ -4,10 +4,8 @@ import com.example.armorvisibility.compat.ArmorVisibilityConfigScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
@@ -20,7 +18,7 @@ import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(value = "armorvisibility", dist = Dist.CLIENT)
 public class ArmorVisibilityClient {
-        private static final Identifier ARMOR_ICON = Identifier.fromNamespaceAndPath(
+    private static final Identifier ARMOR_ICON = Identifier.fromNamespaceAndPath(
             "armorvisibility", "textures/gui/armoricon.png");
 
     public ArmorVisibilityClient(ModContainer modContainer) {
@@ -28,6 +26,7 @@ public class ArmorVisibilityClient {
         modContainer.registerExtensionPoint(IConfigScreenFactory.class,
                 (container, parent) -> new ArmorVisibilityConfigScreen(parent));
         NeoForge.EVENT_BUS.addListener(ScreenEvent.Init.Post.class, this::onScreenInit);
+        NeoForge.EVENT_BUS.addListener(ScreenEvent.Render.Post.class, this::onScreenRender);
     }
 
     private void onScreenInit(ScreenEvent.Init.Post event) {
@@ -42,26 +41,32 @@ public class ArmorVisibilityClient {
         }
 
         Minecraft client = Minecraft.getInstance();
-        Button configButton = new ArmorIconButton(
-                statsButton.getX() + statsButton.getWidth() + 4, statsButton.getY(), button -> {
+        Button configButton = Button.builder(Component.empty(), button -> {
             ArmorVisibilityConfig.INSTANCE.load();
             client.setScreen(new ArmorVisibilityConfigScreen(client.screen));
-        });
+        }).bounds(statsButton.getX() + statsButton.getWidth() + 4, statsButton.getY(), 20, 20).build();
         event.addListener(configButton);
     }
 
-    private static final class ArmorIconButton extends Button {
-        private ArmorIconButton(int x, int y, OnPress onPress) {
-            super(x, y, 20, 20, Component.empty(), onPress, DEFAULT_NARRATION);
-            setTooltip(Tooltip.create(Component.literal("Armor Visibility")));
+    private void onScreenRender(ScreenEvent.Render.Post event) {
+        if (!(event.getScreen() instanceof PauseScreen)) {
+            return;
         }
 
-        @Override
-        protected void renderContents(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-            renderDefaultSprite(graphics);
-            graphics.blit(RenderPipelines.GUI_TEXTURED, ARMOR_ICON, getX() + 2, getY() + 2,
-                    0, 0, 16, 16, 16, 16);
+        Button statsButton = findStatisticsButton(event.getScreen());
+        if (statsButton == null) {
+            return;
         }
+
+        int configButtonX = statsButton.getX() + statsButton.getWidth() + 4;
+        int configButtonY = statsButton.getY();
+        event.getScreen().children().stream()
+                .filter(Button.class::isInstance)
+                .map(Button.class::cast)
+                .filter(button -> button.getX() == configButtonX && button.getY() == configButtonY)
+                .findFirst()
+                .ifPresent(button -> event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, ARMOR_ICON,
+                        button.getX() + 2, button.getY() + 2, 0, 0, 16, 16, 16, 16));
     }
 
     private static Button findStatisticsButton(Screen screen) {

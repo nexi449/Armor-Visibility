@@ -5,19 +5,19 @@ LICENSE
 
 # ignore everything in each module except src
 ArmorVisibility-Fabric/*
-ArmorVisibility-Fabric-26.1-26.2/*
+ArmorVisibility-Fabric-26.1-26.3/*
 ArmorVisibility-Neoforge/*
 ArmorVisibility-Quilt/*
-ArmorVisibility-Quilt-26.1-26.2/*
+ArmorVisibility-Quilt-26.1-26.3/*
 
 # keep source trees and root docs
 !ArmorVisibility-Fabric/
 !ArmorVisibility-Fabric/src/
 !ArmorVisibility-Fabric/src/**
 
-!ArmorVisibility-Fabric-26.1-26.2/
-!ArmorVisibility-Fabric-26.1-26.2/src/
-!ArmorVisibility-Fabric-26.1-26.2/src/**
+!ArmorVisibility-Fabric-26.1-26.3/
+!ArmorVisibility-Fabric-26.1-26.3/src/
+!ArmorVisibility-Fabric-26.1-26.3/src/**
 
 !ArmorVisibility-Neoforge/
 !ArmorVisibility-Neoforge/src/
@@ -27,6 +27,6 @@ ArmorVisibility-Quilt-26.1-26.2/*
 !ArmorVisibility-Quilt/src/
 !ArmorVisibility-Quilt/src/**
 
-!ArmorVisibility-Quilt-26.1-26.2/
-!ArmorVisibility-Quilt-26.1-26.2/src/
-!ArmorVisibility-Quilt-26.1-26.2/src/**
+!ArmorVisibility-Quilt-26.1-26.3/
+!ArmorVisibility-Quilt-26.1-26.3/src/
+!ArmorVisibility-Quilt-26.1-26.3/src/**

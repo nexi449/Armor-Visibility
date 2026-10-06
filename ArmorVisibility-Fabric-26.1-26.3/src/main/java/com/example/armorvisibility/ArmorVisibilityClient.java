@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -34,29 +33,17 @@ public class ArmorVisibilityClient implements ClientModInitializer {
                 return;
             }
 
-            Button configButton = new ArmorIconButton(
-                    statsButton.getX() + statsButton.getWidth() + 4, statsButton.getY(), button -> {
+            Button configButton = Button.builder(Component.empty(), button -> {
                 ArmorVisibilityConfig.INSTANCE.load();
                 showScreen(client, new ArmorVisibilityConfigScreen(screen));
-            });
+            }).bounds(statsButton.getX() + statsButton.getWidth() + 4, statsButton.getY(), 20, 20).build();
             Screens.getWidgets(screen).add(configButton);
+
+            ScreenEvents.afterForeground(screen).register((currentScreen, extractor, mouseX, mouseY, delta) ->
+                    extractor.blit(RenderPipelines.GUI_TEXTURED, ARMOR_ICON, configButton.getX() + 2,
+                            configButton.getY() + 2, 0, 0, 16, 16, 16, 16));
         });
 
-    }
-
-    private static final class ArmorIconButton extends Button {
-        private ArmorIconButton(int x, int y, OnPress onPress) {
-            super(x, y, 20, 20, Component.empty(), onPress, DEFAULT_NARRATION);
-            setTooltip(Tooltip.create(Component.literal("Armor Visibility")));
-        }
-
-        @Override
-        protected void extractContents(net.minecraft.client.gui.GuiGraphicsExtractor extractor,
-                                       int mouseX, int mouseY, float delta) {
-            extractDefaultSprite(extractor);
-                extractor.blit(RenderPipelines.GUI_TEXTURED, ARMOR_ICON, getX() + 2, getY() + 2,
-                    0, 0, 16, 16, 16, 16);
-        }
     }
 
     public static void showScreen(Minecraft client, Screen screen) {

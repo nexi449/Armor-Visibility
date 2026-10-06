@@ -6,7 +6,8 @@
   "client": [
     "ArmorFeatureRendererMixin",
     "ElytraFeatureRendererMixin",
-    "CapeFeatureRendererMixin"
+    "CapeFeatureRendererMixin",
+    "PauseMenuIconMixin"
   ],
   "injectors": {
     "defaultRequire": 1
