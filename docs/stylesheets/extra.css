@@ -16,10 +16,16 @@
   --md-typeset-a-color: #373537;
 }
 
+html,
 body,
 .md-container,
-.md-main {
-  background-color: var(--md-default-bg-color);
+.md-main,
+.md-main__inner,
+.md-sidebar,
+.md-sidebar__scrollwrap,
+.md-content,
+.md-content__inner {
+  background-color: #1e2129;
 }
 
 a,
