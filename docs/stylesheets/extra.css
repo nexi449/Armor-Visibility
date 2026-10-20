@@ -14,6 +14,12 @@
   --md-typeset-a-color: #373537;
 }
 
+body,
+.md-container,
+.md-main {
+  background-color: var(--md-default-bg-color);
+}
+
 a,
 a:visited,
 a:hover,
