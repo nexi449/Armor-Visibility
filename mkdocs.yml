@@ -1,23 +1,28 @@
 site_name: Armor Visibility
 site_description: Documentation for the Armor Visibility Minecraft mod
-repo_url: https://github.com/nexi449/Armor-Visibility
-edit_uri: edit/main/docs/
 
 theme:
   name: material
+  language: en
   palette:
-    - scheme: slate
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-sunny
-        name: Switch to light mode
-    - scheme: default
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.images
 
 extra_css:
   - stylesheets/extra.css
