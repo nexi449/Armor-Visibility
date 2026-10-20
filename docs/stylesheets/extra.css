@@ -69,8 +69,10 @@ a:active,
 
 .md-header__option[data-md-component="palette"] {
   order: 1;
+  margin-left: auto;
 }
 
 .md-search {
   order: 2;
+  margin-left: 0;
 }
