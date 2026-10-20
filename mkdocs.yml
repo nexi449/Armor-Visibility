@@ -1,0 +1,25 @@
+site_name: Armor Visibility
+site_description: Documentation for the Armor Visibility Minecraft mod
+repo_url: https://github.com/nexi449/Armor-Visibility
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+    - scheme: slate
+      primary: custom
+      accent: custom
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Overview: index.md
+  - Installation: install.md
+  - Configuration: configuration.md
+  - Open the settings: using-the-mod.md
+  - Troubleshooting: help.md
+  - DevWiki: devwiki.md
