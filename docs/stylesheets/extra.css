@@ -77,8 +77,8 @@ a:active,
   margin-left: 0;
 }
 
-.md-header__button.md-logo {
-  display: none;
+header.md-header a.md-header__button.md-logo {
+  display: none !important;
 }
 
 .md-header__source,
