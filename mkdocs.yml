@@ -4,6 +4,7 @@ site_description: Documentation for the Armor Visibility Minecraft mod
 theme:
   name: material
   language: en
+  custom_dir: docs/overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -26,7 +27,6 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
-  - stylesheets/header.css
 
 nav:
   - Overview: index.md

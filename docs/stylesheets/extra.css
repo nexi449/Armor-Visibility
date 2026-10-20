@@ -77,10 +77,6 @@ a:active,
   margin-left: 0;
 }
 
-header.md-header a.md-header__button.md-logo {
-  display: none !important;
-}
-
 .md-header__source,
 .md-source,
 .md-source__facts {
