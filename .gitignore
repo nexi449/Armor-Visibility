@@ -7,6 +7,7 @@ LICENSE
 ArmorVisibility-Fabric/*
 ArmorVisibility-Fabric-26.1-26.3/*
 ArmorVisibility-Neoforge/*
+ArmorVisibility-Neoforge-26.3/*
 ArmorVisibility-Quilt/*
 ArmorVisibility-Quilt-26.1-26.3/*
 
@@ -22,6 +23,10 @@ ArmorVisibility-Quilt-26.1-26.3/*
 !ArmorVisibility-Neoforge/
 !ArmorVisibility-Neoforge/src/
 !ArmorVisibility-Neoforge/src/**
+
+!ArmorVisibility-Neoforge-26.3/
+!ArmorVisibility-Neoforge-26.3/src/
+!ArmorVisibility-Neoforge-26.3/src/**
 
 !ArmorVisibility-Quilt/
 !ArmorVisibility-Quilt/src/

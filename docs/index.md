@@ -11,9 +11,10 @@ Armor Visibility is a client-side Minecraft mod that lets you control which armo
 
 ## Features
 
-- Toggle armor visibility globally or separately for helmet, chestplate, leggings, and boots.
-- Show or hide capes and elytra.
-- Choose whether armor visibility rules apply to player entities and other entities.
+- Preview your player model while configuring the mod.
+- Adjust opacity and enchantment glint independently for each armor slot; adjust offhand-item opacity.
+- Save, load, and delete five presets, with setting summaries on hover.
+- Toggle armor, cape, and elytra visibility, and choose how armor rules apply to other entities and players.
 - Open the settings from the pause menu or, with Mod Menu installed, from its mod list.
 
-The repository provides builds for Fabric, Quilt, and NeoForge. Check [Installation](install.md) for the Minecraft versions currently represented in the project.
+The repository provides builds for Fabric, Quilt, and NeoForge. See [Installation](install.md) for the versions represented in each loader module.

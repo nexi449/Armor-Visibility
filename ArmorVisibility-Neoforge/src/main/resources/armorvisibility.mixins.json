@@ -5,6 +5,14 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ArmorFeatureRendererMixin",
+    "EquipmentLayerRendererMixin",
+    "ItemInHandLayerMixin",
+    "FirstPersonOffhandRendererMixin",
+    "ItemStackRenderStateLayerMixin",
+    "ShieldSpecialRendererMixin",
+    "TridentSpecialRendererMixin",
+    "ConduitSpecialRendererMixin",
+    "BannerRendererMixin",
     "CapeFeatureRendererMixin",
     "WingsLayerMixin"
   ],

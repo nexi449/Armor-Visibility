@@ -1,24 +1,30 @@
 package com.example.armorvisibility.mixin;
 
 import com.example.armorvisibility.ArmorVisibilityConfig;
+import com.example.armorvisibility.ArmorVisibilityRenderContext;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.layers.EquipmentLayerRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
 @Mixin(HumanoidArmorLayer.class)
 public abstract class ArmorFeatureRendererMixin {
-
     @Inject(method = "renderArmorPiece", at = @At("HEAD"), cancellable = true)
     private void armorvisibility$cancelArmorRender(
             PoseStack matrices,
@@ -55,6 +61,50 @@ public abstract class ArmorFeatureRendererMixin {
 
         if (shouldHideForCurrentEntity) {
             ci.cancel();
+        }
+    }
+
+    @Redirect(
+            method = "renderArmorPiece",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer;"
+                            + "renderLayers(Lnet/minecraft/client/resources/model/EquipmentClientInfo$LayerType;"
+                            + "Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/client/model/Model;"
+                            + "Ljava/lang/Object;Lnet/minecraft/world/item/ItemStack;"
+                            + "Lcom/mojang/blaze3d/vertex/PoseStack;"
+                            + "Lnet/minecraft/client/renderer/SubmitNodeCollector;II)V"
+            )
+    )
+    private <S> void armorvisibility$renderWithOpacity(
+            EquipmentLayerRenderer renderer,
+            EquipmentClientInfo.LayerType layerType,
+            ResourceKey<EquipmentAsset> equipmentAsset,
+            Model<? super S> model,
+            S modelState,
+            ItemStack armorStack,
+            PoseStack matrices,
+            SubmitNodeCollector queue,
+            int light,
+            int outlineColor,
+            PoseStack originalMatrices,
+            SubmitNodeCollector originalQueue,
+            ItemStack stack,
+            EquipmentSlot slot,
+            int originalLight,
+            HumanoidRenderState state
+    ) {
+        boolean appliesSettings = !(ArmorVisibilityConfig.INSTANCE.isPlayerOnly()
+                && state.entityType != EntityType.PLAYER)
+                && (!isOtherPlayer(state) || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers());
+        float opacity = appliesSettings ? ArmorVisibilityConfig.INSTANCE.getArmorOpacity(slot) : 1.0F;
+        ArmorVisibilityRenderContext.State previousState =
+                ArmorVisibilityRenderContext.setCurrentState(slot, opacity, appliesSettings);
+        try {
+            renderer.renderLayers(layerType, equipmentAsset, model, modelState, armorStack,
+                    matrices, queue, light, outlineColor);
+        } finally {
+            ArmorVisibilityRenderContext.restoreState(previousState);
         }
     }
 

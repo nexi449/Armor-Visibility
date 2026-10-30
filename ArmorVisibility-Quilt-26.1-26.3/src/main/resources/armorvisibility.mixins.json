@@ -5,6 +5,14 @@
   "compatibilityLevel": "JAVA_25",
   "client": [
     "ArmorFeatureRendererMixin",
+    "EquipmentLayerRendererMixin",
+    "ItemInHandLayerMixin",
+    "FirstPersonOffhandRendererMixin",
+    "ItemStackRenderStateLayerMixin",
+    "OffhandSpecialModelRendererMixin",
+    "OffhandShieldRendererMixin",
+    "OffhandTridentRendererMixin",
+    "OffhandShieldPatternMixin",
     "ElytraFeatureRendererMixin",
     "CapeFeatureRendererMixin"
   ],

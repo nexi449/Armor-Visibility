@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 
 public final class ArmorVisibilityConfig {
@@ -50,18 +51,48 @@ public final class ArmorVisibilityConfig {
         boolean hideChestplate = false;
         boolean hideLeggings = false;
         boolean hideBoots = false;
+        Float helmetOpacity = 1.0F;
+        Float chestplateOpacity = 1.0F;
+        Float leggingsOpacity = 1.0F;
+        Float bootsOpacity = 1.0F;
+        Float offhandOpacity = 1.0F;
+        boolean helmetGlint = true;
+        boolean chestplateGlint = true;
+        boolean leggingsGlint = true;
+        boolean bootsGlint = true;
         boolean hideForOtherPlayers = false;
         boolean keepElytraVisible = true;
         boolean keepCapeVisible = true;
         boolean playerOnly = false;
+        Preset[] presets = new Preset[5];
+    }
+
+    private static final class Preset {
+        boolean armorVisible;
+        boolean hideHelmet;
+        boolean hideChestplate;
+        boolean hideLeggings;
+        boolean hideBoots;
+        Float helmetOpacity;
+        Float chestplateOpacity;
+        Float leggingsOpacity;
+        Float bootsOpacity;
+        Float offhandOpacity;
+        boolean helmetGlint;
+        boolean chestplateGlint;
+        boolean leggingsGlint;
+        boolean bootsGlint;
+        boolean hideForOtherPlayers;
+        boolean keepElytraVisible;
+        boolean keepCapeVisible;
+        boolean playerOnly;
     }
 
     private final Path configPath;
     private Data data;
 
     private ArmorVisibilityConfig() {
-        this.configPath = FMLPaths.CONFIGDIR.get()
-                .resolve(FILE_NAME);
+        this.configPath = FMLPaths.CONFIGDIR.get().resolve(FILE_NAME);
         this.data = new Data();
     }
 
@@ -77,6 +108,11 @@ public final class ArmorVisibilityConfig {
         try (Reader reader = Files.newBufferedReader(configPath, StandardCharsets.UTF_8)) {
             Data loaded = GSON.fromJson(reader, Data.class);
             this.data = (loaded != null) ? loaded : new Data();
+            if (this.data.presets == null) {
+                this.data.presets = new Preset[5];
+            } else if (this.data.presets.length != 5) {
+                this.data.presets = Arrays.copyOf(this.data.presets, 5);
+            }
         } catch (IOException | JsonSyntaxException e) {
 
 
@@ -161,10 +197,10 @@ public final class ArmorVisibilityConfig {
         }
 
         return switch (slot) {
-            case HEAD -> data.hideHelmet;
-            case CHEST -> data.hideChestplate;
-            case LEGS -> data.hideLeggings;
-            case FEET -> data.hideBoots;
+            case HEAD -> data.hideHelmet || getArmorOpacity(slot) == 0.0F;
+            case CHEST -> data.hideChestplate || getArmorOpacity(slot) == 0.0F;
+            case LEGS -> data.hideLeggings || getArmorOpacity(slot) == 0.0F;
+            case FEET -> data.hideBoots || getArmorOpacity(slot) == 0.0F;
             default -> false;
         };
     }
@@ -179,5 +215,180 @@ public final class ArmorVisibilityConfig {
             }
         }
         save();
+    }
+
+    public synchronized float getArmorOpacity(EquipmentSlot slot) {
+        return switch (slot) {
+            case HEAD -> data.hideHelmet ? 0.0F : clampOpacity(data.helmetOpacity);
+            case CHEST -> data.hideChestplate ? 0.0F : clampOpacity(data.chestplateOpacity);
+            case LEGS -> data.hideLeggings ? 0.0F : clampOpacity(data.leggingsOpacity);
+            case FEET -> data.hideBoots ? 0.0F : clampOpacity(data.bootsOpacity);
+            default -> 1.0F;
+        };
+    }
+
+    public synchronized void setArmorOpacity(EquipmentSlot slot, float opacity) {
+        float clampedOpacity = clampOpacity(opacity);
+        switch (slot) {
+            case HEAD -> {
+                data.hideHelmet = false;
+                data.helmetOpacity = clampedOpacity;
+            }
+            case CHEST -> {
+                data.hideChestplate = false;
+                data.chestplateOpacity = clampedOpacity;
+            }
+            case LEGS -> {
+                data.hideLeggings = false;
+                data.leggingsOpacity = clampedOpacity;
+            }
+            case FEET -> {
+                data.hideBoots = false;
+                data.bootsOpacity = clampedOpacity;
+            }
+            default -> {
+                return;
+            }
+        }
+    }
+
+    public synchronized float getOffhandOpacity() {
+        return clampOpacity(data.offhandOpacity);
+    }
+
+    public synchronized void setOffhandOpacity(float opacity) {
+        data.offhandOpacity = clampOpacity(opacity);
+    }
+
+    public synchronized boolean shouldShowGlint(EquipmentSlot slot) {
+        return switch (slot) {
+            case HEAD -> data.helmetGlint;
+            case CHEST -> data.chestplateGlint;
+            case LEGS -> data.leggingsGlint;
+            case FEET -> data.bootsGlint;
+            default -> true;
+        };
+    }
+
+    public synchronized void setShowGlint(EquipmentSlot slot, boolean showGlint) {
+        switch (slot) {
+            case HEAD -> data.helmetGlint = showGlint;
+            case CHEST -> data.chestplateGlint = showGlint;
+            case LEGS -> data.leggingsGlint = showGlint;
+            case FEET -> data.bootsGlint = showGlint;
+            default -> {
+                return;
+            }
+        }
+        save();
+    }
+
+    public synchronized boolean hasPreset(int index) {
+        checkPresetIndex(index);
+        return data.presets[index] != null;
+    }
+
+    public synchronized void savePreset(int index) {
+        checkPresetIndex(index);
+        Preset preset = new Preset();
+        preset.armorVisible = data.armorVisible;
+        preset.hideHelmet = data.hideHelmet;
+        preset.hideChestplate = data.hideChestplate;
+        preset.hideLeggings = data.hideLeggings;
+        preset.hideBoots = data.hideBoots;
+        preset.helmetOpacity = clampOpacity(data.helmetOpacity);
+        preset.chestplateOpacity = clampOpacity(data.chestplateOpacity);
+        preset.leggingsOpacity = clampOpacity(data.leggingsOpacity);
+        preset.bootsOpacity = clampOpacity(data.bootsOpacity);
+        preset.offhandOpacity = clampOpacity(data.offhandOpacity);
+        preset.helmetGlint = data.helmetGlint;
+        preset.chestplateGlint = data.chestplateGlint;
+        preset.leggingsGlint = data.leggingsGlint;
+        preset.bootsGlint = data.bootsGlint;
+        preset.hideForOtherPlayers = data.hideForOtherPlayers;
+        preset.keepElytraVisible = data.keepElytraVisible;
+        preset.keepCapeVisible = data.keepCapeVisible;
+        preset.playerOnly = data.playerOnly;
+        data.presets[index] = preset;
+        save();
+    }
+
+    public synchronized void applyPreset(int index) {
+        checkPresetIndex(index);
+        Preset preset = data.presets[index];
+        if (preset == null) {
+            return;
+        }
+
+        data.armorVisible = preset.armorVisible;
+        data.hideHelmet = preset.hideHelmet;
+        data.hideChestplate = preset.hideChestplate;
+        data.hideLeggings = preset.hideLeggings;
+        data.hideBoots = preset.hideBoots;
+        data.helmetOpacity = clampOpacity(preset.helmetOpacity);
+        data.chestplateOpacity = clampOpacity(preset.chestplateOpacity);
+        data.leggingsOpacity = clampOpacity(preset.leggingsOpacity);
+        data.bootsOpacity = clampOpacity(preset.bootsOpacity);
+        data.offhandOpacity = clampOpacity(preset.offhandOpacity);
+        data.helmetGlint = preset.helmetGlint;
+        data.chestplateGlint = preset.chestplateGlint;
+        data.leggingsGlint = preset.leggingsGlint;
+        data.bootsGlint = preset.bootsGlint;
+        data.hideForOtherPlayers = preset.hideForOtherPlayers;
+        data.keepElytraVisible = preset.keepElytraVisible;
+        data.keepCapeVisible = preset.keepCapeVisible;
+        data.playerOnly = preset.playerOnly;
+        save();
+    }
+
+    public synchronized void deletePreset(int index) {
+        checkPresetIndex(index);
+        data.presets[index] = null;
+        save();
+    }
+
+    public synchronized String describePreset(int index) {
+        checkPresetIndex(index);
+        Preset preset = data.presets[index];
+        if (preset == null) {
+            return "Empty preset\nLeft-click to save current settings";
+        }
+
+        return "Armor: " + onOff(preset.armorVisible)
+                + "\nHelmet: " + percentage(preset.hideHelmet ? 0.0F : preset.helmetOpacity)
+                + " | Glint: " + onOff(preset.helmetGlint)
+                + "\nChestplate: " + percentage(preset.hideChestplate ? 0.0F : preset.chestplateOpacity)
+                + " | Glint: " + onOff(preset.chestplateGlint)
+                + "\nLeggings: " + percentage(preset.hideLeggings ? 0.0F : preset.leggingsOpacity)
+                + " | Glint: " + onOff(preset.leggingsGlint)
+                + "\nBoots: " + percentage(preset.hideBoots ? 0.0F : preset.bootsOpacity)
+                + " | Glint: " + onOff(preset.bootsGlint)
+                + "\nOffhand: " + percentage(preset.offhandOpacity)
+                + "\nCape: " + onOff(preset.keepCapeVisible)
+                + " | Elytra: " + onOff(preset.keepElytraVisible)
+                + "\nPlayer only: " + onOff(preset.playerOnly)
+                + " | Others: " + onOff(preset.hideForOtherPlayers)
+                + "\nRight-click to delete";
+    }
+
+    private static void checkPresetIndex(int index) {
+        if (index < 0 || index >= 5) {
+            throw new IndexOutOfBoundsException("Preset index must be between 0 and 4: " + index);
+        }
+    }
+
+    private static String onOff(boolean enabled) {
+        return enabled ? "ON" : "OFF";
+    }
+
+    private static String percentage(Float value) {
+        return Math.round(clampOpacity(value) * 100.0F) + "%";
+    }
+
+    private static float clampOpacity(Float opacity) {
+        if (opacity == null) {
+            return 1.0F;
+        }
+        return Math.max(0.0F, Math.min(1.0F, opacity));
     }
 }

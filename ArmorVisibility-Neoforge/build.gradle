@@ -1,0 +1,62 @@
+plugins {
+    id 'net.neoforged.moddev' version '2.0.107'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+}
+
+neoForge {
+    version = project.neoforge_version
+
+    runs {
+        client {
+            client()
+            gameDirectory = project.file('run')
+        }
+    }
+
+    mods {
+        armorvisibility {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${project.neoforge_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+java {
+    // Minecraft 1.21.x targets Java 21.
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}

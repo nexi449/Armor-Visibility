@@ -1,12 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "refmap": "armorvisibility-refmap.json",
   "package": "com.example.armorvisibility.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ArmorFeatureRendererMixin",
+    "HeldItemFeatureRendererMixin",
+    "FirstPersonOffhandRendererMixin",
+    "ItemRenderStateLayerMixin",
+    "OffhandSpecialItemRendererMixin",
     "ElytraFeatureRendererMixin",
     "CapeFeatureRendererMixin",
+    "EquipmentRendererMixin",
     "PauseMenuIconMixin"
   ],
   "injectors": {

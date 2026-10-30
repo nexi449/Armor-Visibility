@@ -2,21 +2,21 @@
 
 ## Choose the right build
 
-Use a mod file made for your exact Minecraft version and mod loader. This repository currently contains:
+Use a mod file made for your exact Minecraft version and mod loader. The current project declares these Minecraft version ranges:
 
 | Loader | Minecraft versions represented in the project |
 | --- | --- |
-| Fabric | 1.21.11 and 26.3 |
-| Quilt | 1.21.11 and 26.3 |
-| NeoForge | 1.21.11 |
+| Fabric | 1.21.1–1.21.11 and 26.1–26.3 |
+| Quilt | 1.21.1–1.21.11 and 26.1–26.3 |
+| NeoForge | 1.21.11 and 26.3 |
 
-The version-specific project folders are not interchangeable. Download a release from [Modrinth](https://modrinth.com/project/armorvisibility) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/armorvisibility) and check its game-version and loader labels before installing it.
+The version-specific project folders are not interchangeable. Download a release from [Modrinth](https://modrinth.com/project/armorvisibility) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/armorvisibility) and check its game-version and loader labels before installing it. NeoForge currently has builds for 1.21.11 and 26.3; builds for NeoForge 1.21.1–1.21.10 and 26.1–26.2 are not included in the current project.
 
 ## Requirements
 
 - Minecraft version supported by the selected release
 - The matching Fabric, Quilt, or NeoForge loader
-- Java 21 or newer for Minecraft 1.21.11; follow the Minecraft launcher requirements for newer game versions
+- Java 21 for Minecraft 1.21.11; Java 25 for Minecraft 26.x, following the Minecraft launcher requirements
 
 ## Install
 

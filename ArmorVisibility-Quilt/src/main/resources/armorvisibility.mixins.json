@@ -5,6 +5,11 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ArmorFeatureRendererMixin",
+    "EquipmentRendererMixin",
+    "HeldItemFeatureRendererMixin",
+    "FirstPersonOffhandRendererMixin",
+    "ItemRenderStateLayerMixin",
+    "OffhandSpecialItemRendererMixin",
     "ElytraFeatureRendererMixin",
     "CapeFeatureRendererMixin",
     "PauseMenuIconMixin"
