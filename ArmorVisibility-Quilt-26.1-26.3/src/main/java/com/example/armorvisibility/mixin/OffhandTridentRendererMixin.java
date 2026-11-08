@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.model.object.projectile.TridentModel;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.TridentSpecialRenderer;
@@ -23,14 +23,14 @@ public abstract class OffhandTridentRendererMixin {
             )
     )
     private void armorvisibility$applyOffhandOpacityToGlint(Args args) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()
-                || ArmorVisibilityRenderContext.getOffhandOpacity() >= 1.0F) {
+        if (!ArmorRenderContext.hasOffhandOpacity()
+                || ArmorRenderContext.getOffhandOpacity() >= 1.0F) {
             return;
         }
 
         args.set(3, RenderTypes.entityTranslucentCull(TridentModel.TEXTURE));
         int color = args.get(6);
-        int alpha = Math.round((color >>> 24) * ArmorVisibilityRenderContext.getOffhandOpacity());
+        int alpha = Math.round((color >>> 24) * ArmorRenderContext.getOffhandOpacity());
         args.set(6, (color & 0x00FFFFFF) | (alpha << 24));
     }
 }

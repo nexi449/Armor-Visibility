@@ -1,7 +1,7 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorConfig;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.renderer.entity.layers.EquipmentLayerRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -29,7 +29,7 @@ public abstract class EquipmentLayerRendererMixin {
             )
     )
     private RenderType armorvisibility$useTranslucentArmorLayer(Identifier texture) {
-        ArmorVisibilityRenderContext.ArmorState state = ArmorVisibilityRenderContext.getArmorState();
+        ArmorRenderContext.ArmorState state = ArmorRenderContext.getArmorState();
         if (state != null && state.applySettings() && state.opacity() < 1.0F) {
             return RenderTypes.entityTranslucentCull(texture);
         }
@@ -44,7 +44,7 @@ public abstract class EquipmentLayerRendererMixin {
             )
     )
     private RenderType armorvisibility$useTranslucentGlintLayer(Identifier texture) {
-        ArmorVisibilityRenderContext.ArmorState state = ArmorVisibilityRenderContext.getArmorState();
+        ArmorRenderContext.ArmorState state = ArmorRenderContext.getArmorState();
         if (state != null && state.applySettings() && state.opacity() < 1.0F) {
             return RenderTypes.entityTranslucentCull(texture);
         }
@@ -59,9 +59,9 @@ public abstract class EquipmentLayerRendererMixin {
             )
     )
     private boolean armorvisibility$respectGlintSetting(ItemStack stack) {
-        ArmorVisibilityRenderContext.ArmorState state = ArmorVisibilityRenderContext.getArmorState();
+        ArmorRenderContext.ArmorState state = ArmorRenderContext.getArmorState();
         return stack.hasFoil() && (state == null || !state.applySettings()
-                || state.slot() == null || ArmorVisibilityConfig.INSTANCE.shouldShowGlint(state.slot()));
+                || state.slot() == null || ArmorConfig.INSTANCE.shouldShowGlint(state.slot()));
     }
 
     @ModifyArg(
@@ -73,7 +73,7 @@ public abstract class EquipmentLayerRendererMixin {
             index = 6
     )
     private int armorvisibility$applyArmorOpacity(int color) {
-        ArmorVisibilityRenderContext.ArmorState state = ArmorVisibilityRenderContext.getArmorState();
+        ArmorRenderContext.ArmorState state = ArmorRenderContext.getArmorState();
         if (state == null || !state.applySettings()) {
             return color;
         }

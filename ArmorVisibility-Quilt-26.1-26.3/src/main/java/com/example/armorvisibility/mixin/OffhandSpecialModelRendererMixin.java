@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.OrderedSubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -80,12 +80,12 @@ public interface OffhandSpecialModelRendererMixin {
         if (!armorvisibility$hasTranslucentOffhand()) {
             return color;
         }
-        int alpha = Math.round((color >>> 24) * ArmorVisibilityRenderContext.getOffhandOpacity());
+        int alpha = Math.round((color >>> 24) * ArmorRenderContext.getOffhandOpacity());
         return (color & 0x00FFFFFF) | (alpha << 24);
     }
 
     private static boolean armorvisibility$hasTranslucentOffhand() {
-        return ArmorVisibilityRenderContext.hasOffhandOpacity()
-                && ArmorVisibilityRenderContext.getOffhandOpacity() < 1.0F;
+        return ArmorRenderContext.hasOffhandOpacity()
+                && ArmorRenderContext.getOffhandOpacity() < 1.0F;
     }
 }

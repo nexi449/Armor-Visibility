@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.OrderedSubmitNodeCollector;
@@ -59,13 +59,13 @@ public interface OffhandSpecialModelRendererMixin {
 
     @Unique
     private static boolean armorvisibility$hasTranslucentOffhand() {
-        return ArmorVisibilityRenderContext.hasOffhandOpacity()
-                && ArmorVisibilityRenderContext.getOffhandOpacity() < 1.0F;
+        return ArmorRenderContext.hasOffhandOpacity()
+                && ArmorRenderContext.getOffhandOpacity() < 1.0F;
     }
 
     @Unique
     private static int armorvisibility$applyOffhandOpacity(int color) {
-        int alpha = Math.round((color >>> 24) * ArmorVisibilityRenderContext.getOffhandOpacity());
+        int alpha = Math.round((color >>> 24) * ArmorRenderContext.getOffhandOpacity());
         return (color & 0x00FFFFFF) | (alpha << 24);
     }
 }

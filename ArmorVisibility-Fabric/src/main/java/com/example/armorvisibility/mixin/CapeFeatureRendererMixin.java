@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
+import com.example.armorvisibility.ArmorConfig;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
@@ -22,7 +22,7 @@ public abstract class CapeFeatureRendererMixin {
             float limbDistance,
             CallbackInfo ci
     ) {
-        if (!ArmorVisibilityConfig.INSTANCE.shouldKeepCapeVisible()) {
+        if (!ArmorConfig.INSTANCE.shouldKeepCapeVisible()) {
             ci.cancel();
         }
     }

@@ -1,7 +1,7 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorConfig;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
@@ -38,13 +38,13 @@ public abstract class ItemInHandLayerMixin {
             return;
         }
         var player = net.minecraft.client.Minecraft.getInstance().player;
-        boolean appliesSettings = !(ArmorVisibilityConfig.INSTANCE.isPlayerOnly()
+        boolean appliesSettings = !(ArmorConfig.INSTANCE.isPlayerOnly()
                 && (player == null || state.entityType != player.getType()))
                 && (!armorvisibility$isOtherPlayer(state)
-                || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers());
+                || ArmorConfig.INSTANCE.shouldHideForOtherPlayers());
         if (appliesSettings) {
             armorvisibility$previousOffhandOpacity =
-                    ArmorVisibilityRenderContext.setOffhandOpacity(ArmorVisibilityConfig.INSTANCE.getOffhandOpacity());
+                    ArmorRenderContext.setOffhandOpacity(ArmorConfig.INSTANCE.getOffhandOpacity());
             armorvisibility$offhandContextSet = true;
         }
     }
@@ -61,7 +61,7 @@ public abstract class ItemInHandLayerMixin {
             CallbackInfo ci
     ) {
         if (armorvisibility$offhandContextSet) {
-            ArmorVisibilityRenderContext.restoreOffhandOpacity(armorvisibility$previousOffhandOpacity);
+            ArmorRenderContext.restoreOffhandOpacity(armorvisibility$previousOffhandOpacity);
             armorvisibility$previousOffhandOpacity = null;
             armorvisibility$offhandContextSet = false;
         }

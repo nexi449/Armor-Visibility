@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
@@ -32,11 +32,11 @@ public abstract class ItemStackRenderStateLayerMixin {
             index = 5
     )
     private int[] armorvisibility$applyOffhandOpacity(int[] tints) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()) {
+        if (!ArmorRenderContext.hasOffhandOpacity()) {
             return tints;
         }
 
-        float opacity = ArmorVisibilityRenderContext.getOffhandOpacity();
+        float opacity = ArmorRenderContext.getOffhandOpacity();
         if (opacity >= 1.0F) {
             return tints;
         }
@@ -60,8 +60,8 @@ public abstract class ItemStackRenderStateLayerMixin {
             index = 6
     )
     private ItemQuads armorvisibility$makeOffhandQuadsTranslucent(ItemQuads quads) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()
-                || ArmorVisibilityRenderContext.getOffhandOpacity() >= 1.0F) {
+        if (!ArmorRenderContext.hasOffhandOpacity()
+                || ArmorRenderContext.getOffhandOpacity() >= 1.0F) {
             return quads;
         }
 

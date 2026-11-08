@@ -4,6 +4,8 @@ Open the configuration from the Armor Visibility icon beside **Statistics** in t
 
 The screen combines the controls with a live player preview. Changes are saved automatically; **Done** returns to the previous menu.
 
+The screen follows Minecraft's selected language and is available in English, German, Simplified Chinese, Spanish, Brazilian Portuguese, and Russian.
+
 ## Armor and rendering
 
 | Control | What it does |
@@ -12,7 +14,7 @@ The screen combines the controls with a live player preview. Changes are saved a
 | **Global Armor** | Turns armor rendering on or off globally, regardless of slot opacity. |
 | **Offhand** | Adjusts opacity for the offhand item in first- and third-person rendering. |
 
-The preview displays your player model while configuring the screen. Some specialized item renderers may not use the same transparency path as ordinary rendered items.
+The preview displays your player model while configuring the screen. Offhand opacity also applies to special item renderers that use Minecraft's supplied item buffers. First-person map overlays, textureless special models, and third-party renderers that bypass those buffers may remain fully visible; these cases are not affected by the Fabric implementation either.
 
 ## Other visibility controls
 

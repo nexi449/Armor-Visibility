@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityClient;
+import com.example.armorvisibility.ArmorClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,6 +13,6 @@ public abstract class PauseMenuIconMixin {
     @Inject(method = "renderWithTooltip", at = @At("TAIL"))
     private void armorvisibility$renderPauseMenuIcon(DrawContext context, int mouseX, int mouseY,
                                                      float delta, CallbackInfo ci) {
-        ArmorVisibilityClient.renderPauseMenuIcon((Screen) (Object) this, context);
+        ArmorClient.renderPauseMenuIcon((Screen) (Object) this, context);
     }
 }

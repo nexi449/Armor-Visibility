@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
+import com.example.armorvisibility.ArmorConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -23,7 +23,7 @@ public abstract class CapeFeatureRendererMixin {
     private void armorvisibility$hideCapeWhenDisabled(PoseStack poseStack, SubmitNodeCollector collector,
                                                        int light, AvatarRenderState state, float limbAngle,
                                                        float limbDistance, CallbackInfo ci) {
-        if (!ArmorVisibilityConfig.INSTANCE.shouldKeepCapeVisible() && armorvisibility$shouldApplyCapeSetting(state)) {
+        if (!ArmorConfig.INSTANCE.shouldKeepCapeVisible() && armorvisibility$shouldApplyCapeSetting(state)) {
             ci.cancel();
         }
     }
@@ -34,12 +34,12 @@ public abstract class CapeFeatureRendererMixin {
             return false;
         }
         boolean localPlayer = state.id == client.player.getId();
-        if (ArmorVisibilityConfig.INSTANCE.isPlayerOnly()
+        if (ArmorConfig.INSTANCE.isPlayerOnly()
                 && !localPlayer) {
             return false;
         }
 
         boolean isOtherPlayer = !localPlayer && state.entityType == client.player.getType();
-        return !isOtherPlayer || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers();
+        return !isOtherPlayer || ArmorConfig.INSTANCE.shouldHideForOtherPlayers();
     }
 }

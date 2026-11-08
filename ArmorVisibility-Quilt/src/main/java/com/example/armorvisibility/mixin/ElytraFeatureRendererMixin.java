@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
+import com.example.armorvisibility.ArmorConfig;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
@@ -22,7 +22,7 @@ public abstract class ElytraFeatureRendererMixin {
             float limbDistance,
             CallbackInfo ci
     ) {
-        if (!ArmorVisibilityConfig.INSTANCE.shouldKeepElytraVisible()) {
+        if (!ArmorConfig.INSTANCE.shouldKeepElytraVisible()) {
             ci.cancel();
         }
     }

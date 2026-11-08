@@ -1,7 +1,7 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorConfig;
+import com.example.armorvisibility.ArmorRenderContext;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -40,7 +40,7 @@ public abstract class FirstPersonOffhandRendererMixin {
     ) {
         if (hand == InteractionHand.OFF_HAND && !item.isEmpty()) {
             armorvisibility$previousOffhandOpacity =
-                    ArmorVisibilityRenderContext.setOffhandOpacity(ArmorVisibilityConfig.INSTANCE.getOffhandOpacity());
+                    ArmorRenderContext.setOffhandOpacity(ArmorConfig.INSTANCE.getOffhandOpacity());
             armorvisibility$offhandContextSet = true;
         }
     }
@@ -61,7 +61,7 @@ public abstract class FirstPersonOffhandRendererMixin {
             CallbackInfo ci
     ) {
         if (armorvisibility$offhandContextSet) {
-            ArmorVisibilityRenderContext.restoreOffhandOpacity(armorvisibility$previousOffhandOpacity);
+            ArmorRenderContext.restoreOffhandOpacity(armorvisibility$previousOffhandOpacity);
             armorvisibility$previousOffhandOpacity = null;
             armorvisibility$offhandContextSet = false;
         }

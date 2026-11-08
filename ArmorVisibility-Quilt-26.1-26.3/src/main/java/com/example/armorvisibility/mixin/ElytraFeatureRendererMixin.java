@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
+import com.example.armorvisibility.ArmorConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.layers.WingsLayer;
@@ -22,7 +22,7 @@ public abstract class ElytraFeatureRendererMixin {
             float limbDistance,
             CallbackInfo ci
     ) {
-        if (!ArmorVisibilityConfig.INSTANCE.shouldKeepElytraVisible()) {
+        if (!ArmorConfig.INSTANCE.shouldKeepElytraVisible()) {
             ci.cancel();
         }
     }

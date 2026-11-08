@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
@@ -32,11 +32,11 @@ public abstract class ItemRenderStateLayerMixin {
             index = 5
     )
     private int[] armorvisibility$applyOffhandOpacity(int[] tints) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()) {
+        if (!ArmorRenderContext.hasOffhandOpacity()) {
             return tints;
         }
 
-        float opacity = ArmorVisibilityRenderContext.getOffhandOpacity();
+        float opacity = ArmorRenderContext.getOffhandOpacity();
         if (opacity >= 1.0F) {
             return tints;
         }
@@ -60,8 +60,8 @@ public abstract class ItemRenderStateLayerMixin {
             index = 6
     )
     private List<BakedQuad> armorvisibility$applyOpacityToUntintedQuads(List<BakedQuad> quads) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()
-                || ArmorVisibilityRenderContext.getOffhandOpacity() >= 1.0F) {
+        if (!ArmorRenderContext.hasOffhandOpacity()
+                || ArmorRenderContext.getOffhandOpacity() >= 1.0F) {
             return quads;
         }
 
@@ -99,8 +99,8 @@ public abstract class ItemRenderStateLayerMixin {
             index = 7
     )
     private RenderLayer armorvisibility$useTranslucentOffhandLayer(RenderLayer renderLayer) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()
-                || ArmorVisibilityRenderContext.getOffhandOpacity() >= 1.0F
+        if (!ArmorRenderContext.hasOffhandOpacity()
+                || ArmorRenderContext.getOffhandOpacity() >= 1.0F
                 || particle == null) {
             return renderLayer;
         }

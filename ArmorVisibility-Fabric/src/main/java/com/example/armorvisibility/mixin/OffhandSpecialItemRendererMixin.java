@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueueImpl;
@@ -21,8 +21,8 @@ public abstract class OffhandSpecialItemRendererMixin {
             )
     )
     private void armorvisibility$useTranslucentLayerForSpecialOffhandItems(Args args) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()
-                || ArmorVisibilityRenderContext.getOffhandOpacity() >= 1.0F) {
+        if (!ArmorRenderContext.hasOffhandOpacity()
+                || ArmorRenderContext.getOffhandOpacity() >= 1.0F) {
             return;
         }
 
@@ -41,11 +41,11 @@ public abstract class OffhandSpecialItemRendererMixin {
             index = 8
     )
     private int armorvisibility$applyOpacityToSpecialOffhandItems(int color) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()) {
+        if (!ArmorRenderContext.hasOffhandOpacity()) {
             return color;
         }
 
-        int alpha = Math.round((color >>> 24) * ArmorVisibilityRenderContext.getOffhandOpacity());
+        int alpha = Math.round((color >>> 24) * ArmorRenderContext.getOffhandOpacity());
         return (color & 0x00FFFFFF) | (alpha << 24);
     }
 }

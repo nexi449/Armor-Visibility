@@ -1,7 +1,7 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorConfig;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.command.RenderCommandQueue;
@@ -24,8 +24,8 @@ public abstract class EquipmentRendererMixin {
             )
     )
     private RenderLayer armorvisibility$useTranslucentLayer(Identifier texture) {
-        EquipmentSlot slot = ArmorVisibilityRenderContext.getCurrentSlot();
-        if (slot != null && ArmorVisibilityRenderContext.getCurrentOpacity() < 1.0F) {
+        EquipmentSlot slot = ArmorRenderContext.getCurrentSlot();
+        if (slot != null && ArmorRenderContext.getCurrentOpacity() < 1.0F) {
             return RenderLayers.armorTranslucent(texture);
         }
         return RenderLayers.armorCutoutNoCull(texture);
@@ -39,10 +39,10 @@ public abstract class EquipmentRendererMixin {
             )
     )
     private boolean armorvisibility$respectGlintSetting(ItemStack stack) {
-        EquipmentSlot slot = ArmorVisibilityRenderContext.getCurrentSlot();
+        EquipmentSlot slot = ArmorRenderContext.getCurrentSlot();
         return stack.hasGlint() && (slot == null
-                || !ArmorVisibilityRenderContext.shouldApplySettings()
-                || ArmorVisibilityConfig.INSTANCE.shouldShowGlint(slot));
+                || !ArmorRenderContext.shouldApplySettings()
+                || ArmorConfig.INSTANCE.shouldShowGlint(slot));
     }
 
     @ModifyArg(
@@ -55,12 +55,12 @@ public abstract class EquipmentRendererMixin {
             index = 6
     )
     private int armorvisibility$applyOpacity(int color) {
-        EquipmentSlot slot = ArmorVisibilityRenderContext.getCurrentSlot();
+        EquipmentSlot slot = ArmorRenderContext.getCurrentSlot();
         if (slot == null) {
             return color;
         }
 
-        float opacity = ArmorVisibilityRenderContext.getCurrentOpacity();
+        float opacity = ArmorRenderContext.getCurrentOpacity();
         int alpha = Math.round((color >>> 24) * opacity);
         return (color & 0x00FFFFFF) | (alpha << 24);
     }

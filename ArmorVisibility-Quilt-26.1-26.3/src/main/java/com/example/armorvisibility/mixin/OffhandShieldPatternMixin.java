@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.blockentity.BannerRenderer;
@@ -26,8 +26,8 @@ public abstract class OffhandShieldPatternMixin {
             )
     )
     private static void armorvisibility$applyOffhandOpacityToBannerPattern(Args args) {
-        if (!ArmorVisibilityRenderContext.hasOffhandOpacity()
-                || ArmorVisibilityRenderContext.getOffhandOpacity() >= 1.0F) {
+        if (!ArmorRenderContext.hasOffhandOpacity()
+                || ArmorRenderContext.getOffhandOpacity() >= 1.0F) {
             return;
         }
 
@@ -35,7 +35,7 @@ public abstract class OffhandShieldPatternMixin {
             args.set(3, RenderTypes.entityTranslucentCull(sprite.atlasLocation()));
         }
         int color = args.get(6);
-        int alpha = Math.round((color >>> 24) * ArmorVisibilityRenderContext.getOffhandOpacity());
+        int alpha = Math.round((color >>> 24) * ArmorRenderContext.getOffhandOpacity());
         args.set(6, (color & 0x00FFFFFF) | (alpha << 24));
     }
 }

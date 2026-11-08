@@ -27,10 +27,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.example.armorvisibility.ArmorVisibilityClient"
+      "com.example.armorvisibility.ArmorClient"
     ],
     "modmenu": [
-      "com.example.armorvisibility.compat.ArmorVisibilityModMenuApi"
+      "com.example.armorvisibility.compat.ModMenuIntegration"
     ]
   },
   "mixins": [

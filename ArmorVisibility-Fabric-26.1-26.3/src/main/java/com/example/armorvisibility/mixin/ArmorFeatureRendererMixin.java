@@ -1,7 +1,7 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorConfig;
+import com.example.armorvisibility.ArmorRenderContext;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
@@ -29,18 +29,18 @@ public abstract class ArmorFeatureRendererMixin {
                                                     HumanoidRenderState state, CallbackInfo ci) {
         if (slot == null) return;
         if (stack.is(Items.ELYTRA)) {
-            if (!ArmorVisibilityConfig.INSTANCE.shouldKeepElytraVisible()) ci.cancel();
+            if (!ArmorConfig.INSTANCE.shouldKeepElytraVisible()) ci.cancel();
             return;
         }
-        if (ArmorVisibilityConfig.INSTANCE.isPlayerOnly() && (Minecraft.getInstance().player == null
+        if (ArmorConfig.INSTANCE.isPlayerOnly() && (Minecraft.getInstance().player == null
             || state.entityType != Minecraft.getInstance().player.getType())) return;
-        if (!ArmorVisibilityConfig.INSTANCE.isArmorVisible()) {
+        if (!ArmorConfig.INSTANCE.isArmorVisible()) {
             ci.cancel();
             return;
         }
         boolean isOtherPlayer = isOtherPlayer(state);
-        if (ArmorVisibilityConfig.INSTANCE.isArmorPartHidden(slot)
-                && (!isOtherPlayer || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers())) ci.cancel();
+        if (ArmorConfig.INSTANCE.isArmorPartHidden(slot)
+                && (!isOtherPlayer || ArmorConfig.INSTANCE.shouldHideForOtherPlayers())) ci.cancel();
     }
 
     @Redirect(
@@ -68,21 +68,21 @@ public abstract class ArmorFeatureRendererMixin {
             int originalLight,
             HumanoidRenderState state
     ) {
-        boolean appliesSettings = !(ArmorVisibilityConfig.INSTANCE.isPlayerOnly()
+        boolean appliesSettings = !(ArmorConfig.INSTANCE.isPlayerOnly()
                 && (Minecraft.getInstance().player == null
                 || state.entityType != Minecraft.getInstance().player.getType()))
-                && (!isOtherPlayer(state) || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers());
-        ArmorVisibilityRenderContext.ArmorState previous =
-                ArmorVisibilityRenderContext.setArmorState(
+                && (!isOtherPlayer(state) || ArmorConfig.INSTANCE.shouldHideForOtherPlayers());
+        ArmorRenderContext.ArmorState previous =
+                ArmorRenderContext.setArmorState(
                         slot,
-                        appliesSettings ? ArmorVisibilityConfig.INSTANCE.getArmorOpacity(slot) : 1.0F,
+                        appliesSettings ? ArmorConfig.INSTANCE.getArmorOpacity(slot) : 1.0F,
                         appliesSettings
                 );
         try {
             renderer.renderLayers(layerType, equipmentAsset, model, modelState, armorStack,
                     poseStack, collector, light, outlineColor);
         } finally {
-            ArmorVisibilityRenderContext.restoreArmorState(previous);
+            ArmorRenderContext.restoreArmorState(previous);
         }
     }
 

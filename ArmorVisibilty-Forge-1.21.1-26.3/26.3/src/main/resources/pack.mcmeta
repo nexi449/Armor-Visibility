@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "Armor Visibility resources",
+    "min_format": [
+      97,
+      1
+    ],
+    "max_format": 97
+  }
+}

@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[0,)"
+license="ARR"
+issueTrackerURL="https://github.com/nexi449/Armor-Visibility/issues"
+
+[[mods]]
+modId="armorvisibility"
+version="${version}"
+displayName="Armor Visibility"
+displayURL="https://modrinth.com/project/armorvisibility"
+authors="nexi499"
+logoFile="assets/armorvisibility/icon.png"
+description='''A mod that allows you to hide your armor'''
+
+[[dependencies.armorvisibility]]
+modId="forge"
+mandatory=true
+versionRange="[66,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.armorvisibility]]
+modId="minecraft"
+mandatory=true
+versionRange="[26.3,26.4)"
+ordering="NONE"
+side="CLIENT"

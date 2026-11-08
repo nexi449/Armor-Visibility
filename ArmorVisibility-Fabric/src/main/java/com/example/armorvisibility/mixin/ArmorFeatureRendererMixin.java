@@ -1,7 +1,7 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityConfig;
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorConfig;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
@@ -39,18 +39,18 @@ public abstract class ArmorFeatureRendererMixin {
             return;
         }
 
-        if (ArmorVisibilityConfig.INSTANCE.isPlayerOnly() && state.entityType != EntityType.PLAYER) {
+        if (ArmorConfig.INSTANCE.isPlayerOnly() && state.entityType != EntityType.PLAYER) {
             return;
         }
 
-        if (!ArmorVisibilityConfig.INSTANCE.isArmorVisible()) {
+        if (!ArmorConfig.INSTANCE.isArmorVisible()) {
             ci.cancel();
             return;
         }
 
         boolean isOtherPlayer = isOtherPlayer(state);
-        boolean shouldHideForCurrentEntity = ArmorVisibilityConfig.INSTANCE.isArmorPartHidden(slot)
-                && (!isOtherPlayer || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers());
+        boolean shouldHideForCurrentEntity = ArmorConfig.INSTANCE.isArmorPartHidden(slot)
+                && (!isOtherPlayer || ArmorConfig.INSTANCE.shouldHideForOtherPlayers());
 
         if (shouldHideForCurrentEntity) {
             ci.cancel();
@@ -82,15 +82,15 @@ public abstract class ArmorFeatureRendererMixin {
             int armorLight,
             BipedEntityRenderState state
     ) {
-        boolean appliesSettings = !(ArmorVisibilityConfig.INSTANCE.isPlayerOnly() && state.entityType != EntityType.PLAYER)
-                && (!isOtherPlayer(state) || ArmorVisibilityConfig.INSTANCE.shouldHideForOtherPlayers());
-        float opacity = appliesSettings ? ArmorVisibilityConfig.INSTANCE.getArmorOpacity(slot) : 1.0F;
-        ArmorVisibilityRenderContext.State previousState =
-                ArmorVisibilityRenderContext.setCurrentState(slot, opacity, appliesSettings);
+        boolean appliesSettings = !(ArmorConfig.INSTANCE.isPlayerOnly() && state.entityType != EntityType.PLAYER)
+                && (!isOtherPlayer(state) || ArmorConfig.INSTANCE.shouldHideForOtherPlayers());
+        float opacity = appliesSettings ? ArmorConfig.INSTANCE.getArmorOpacity(slot) : 1.0F;
+        ArmorRenderContext.State previousState =
+                ArmorRenderContext.setCurrentState(slot, opacity, appliesSettings);
         try {
             equipmentRenderer.render(layerType, equipmentAsset, model, modelState, armorStack, matrices, queue, light, overlay);
         } finally {
-            ArmorVisibilityRenderContext.restoreState(previousState);
+            ArmorRenderContext.restoreState(previousState);
         }
     }
 

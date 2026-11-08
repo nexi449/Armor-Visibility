@@ -12,7 +12,7 @@
 		{
 			"label": "Start NeoForge 1.21.11 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.11'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -20,7 +20,7 @@
 		{
 			"label": "Start NeoForge 1.21.1 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.1'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.1'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -28,7 +28,7 @@
 		{
 			"label": "Start NeoForge 1.21.2 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.2'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.2'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -36,7 +36,7 @@
 		{
 			"label": "Start NeoForge 1.21.3 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.3'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.3'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -44,7 +44,7 @@
 		{
 			"label": "Start NeoForge 1.21.4 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.4'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.4'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -52,7 +52,7 @@
 		{
 			"label": "Start NeoForge 1.21.5 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.5'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.5'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -60,7 +60,7 @@
 		{
 			"label": "Start NeoForge 1.21.6 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.6'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.6'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -68,7 +68,7 @@
 		{
 			"label": "Start NeoForge 1.21.7 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.7'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.7'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -76,7 +76,7 @@
 		{
 			"label": "Start NeoForge 1.21.8 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.8'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.8'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -84,7 +84,7 @@
 		{
 			"label": "Start NeoForge 1.21.9 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.9'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.9'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -92,7 +92,7 @@
 		{
 			"label": "Start NeoForge 1.21.10 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-1.21.10'; .\\gradlew.bat runClient",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\1.21.10'; .\\gradlew.bat runClient",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -100,7 +100,7 @@
 		{
 			"label": "Start NeoForge 26.1 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-26.1'; .\\gradlew.bat runClient '-Dorg.gradle.java.installations.paths=C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21,C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\26.1'; .\\gradlew.bat runClient '-Dorg.gradle.java.installations.paths=C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21,C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -108,7 +108,7 @@
 		{
 			"label": "Start NeoForge 26.2 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-26.2'; .\\gradlew.bat runClient '-Dorg.gradle.java.installations.paths=C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21,C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\26.2'; .\\gradlew.bat runClient '-Dorg.gradle.java.installations.paths=C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21,C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"
@@ -116,7 +116,7 @@
 		{
 			"label": "Start NeoForge 26.3 Client",
 			"type": "shell",
-			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\ArmorVisibility-Neoforge-26.3'; .\\gradlew.bat runClient '-Dorg.gradle.java.installations.paths=C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21,C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'",
+			"command": "$env:JAVA_HOME='C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'; $env:PATH=($env:JAVA_HOME + '\\bin;' + $env:PATH); Set-Location 'D:\\MInecraft Projekts\\ArmorVisibility - Copy\\NeoForge\\26.3'; .\\gradlew.bat runClient '-Dorg.gradle.java.installations.paths=C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK21,C:\\Users\\mainm\\AppData\\Local\\Programs\\ArmorVisibility-JDK25\\jdk-25.0.5+8'",
 			"isBackground": true,
 			"problemMatcher": [],
 			"group": "build"

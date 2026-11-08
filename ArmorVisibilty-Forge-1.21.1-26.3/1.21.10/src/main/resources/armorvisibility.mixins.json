@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.armorvisibility.mixin",
+  "refmap": "armorvisibility.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ArmorFeatureRendererMixin",
+    "EquipmentLayerRendererMixin",
+    "ItemInHandLayerMixin",
+    "FirstPersonOffhandRendererMixin",
+    "ItemStackRenderStateLayerMixin",
+    "ShieldSpecialRendererMixin",
+    "TridentSpecialRendererMixin",
+    "ConduitSpecialRendererMixin",
+    "BannerRendererMixin",
+    "OffhandSpecialModelRendererMixin",
+    "CapeFeatureRendererMixin",
+    "WingsLayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

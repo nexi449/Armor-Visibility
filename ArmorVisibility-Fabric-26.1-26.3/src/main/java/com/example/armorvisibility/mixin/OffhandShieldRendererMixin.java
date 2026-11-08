@@ -1,6 +1,6 @@
 package com.example.armorvisibility.mixin;
 
-import com.example.armorvisibility.ArmorVisibilityRenderContext;
+import com.example.armorvisibility.ArmorRenderContext;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.ShieldSpecialRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -36,12 +36,12 @@ public abstract class OffhandShieldRendererMixin {
     }
 
     private static boolean armorvisibility$hasTranslucentOffhand() {
-        return ArmorVisibilityRenderContext.hasOffhandOpacity()
-                && ArmorVisibilityRenderContext.getOffhandOpacity() < 1.0F;
+        return ArmorRenderContext.hasOffhandOpacity()
+                && ArmorRenderContext.getOffhandOpacity() < 1.0F;
     }
 
     private static int armorvisibility$applyOpacity(int color) {
-        int alpha = Math.round((color >>> 24) * ArmorVisibilityRenderContext.getOffhandOpacity());
+        int alpha = Math.round((color >>> 24) * ArmorRenderContext.getOffhandOpacity());
         return (color & 0x00FFFFFF) | (alpha << 24);
     }
 }
