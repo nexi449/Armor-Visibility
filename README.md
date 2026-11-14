@@ -12,7 +12,7 @@ Hide your own armor or the armor of other players and enjoy your skins without s
 
 ## Download the mod
 
-The mod is available to download on [Modrinth](https://modrinth.com/project/armorvisibility) and [GitHub](https://github.com/nexi449/Armor-Visibility).
+The mod is available to download on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/armorvisibility), [Modrinth](https://modrinth.com/project/armorvisibility) and [GitHub](https://github.com/nexi449/Armor-Visibility).
 
 ---
 
